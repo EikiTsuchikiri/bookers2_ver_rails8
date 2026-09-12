@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "homes/top"
+  root to: "homes#top"
   get "homes/about"
   resources :books, only: [:create, :index, :show, :edit, :update, :destroy]
   resources :users, only: [:new, :create, :index, :show, :edit, :update] , path_names: { new: 'sign_up' }

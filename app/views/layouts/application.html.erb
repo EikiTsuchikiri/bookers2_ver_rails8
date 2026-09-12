@@ -23,6 +23,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'header' %>
+    <main>
+      <p id="notice"><%= notice %></p>
+      <div class="d-flex justify-content-center mb-2">
+        <%= yield %>
+      </div>
+    </main>
+    <%= render 'footer' %>
   </body>
 </html>
