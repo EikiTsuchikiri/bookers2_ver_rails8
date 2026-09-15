@@ -1,2 +1,30 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+      <h2>Sign up</h2>
+      <%= form_with model: @user, url: users_path do |f| %>
+        <%= render 'layouts/errors', obj: @user %>   
+        <div class="field">
+          <%= f.label :name, class: "form-label" %><br>
+          <%= f.text_field :name, autofocus: true, class: "form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :email_address, class: "form-label" %><br>
+          <%= f.email_field :email_address, class: "form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :password, class: "form-label" %><em>(6 characters minimum)</em><br>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation, class: "form-label" %><br>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Sign up", class: "btn btn-sm btn-success" %>
+        </div>
+      <% end %>
+      <%= link_to "Log in", new_session_path %> 
+    </div>
+  </div>
+</div>

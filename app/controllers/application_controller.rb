@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     user_path(Current.user)
   end
 
-    def after_logout_url
+  def after_logout_url
     root_path
   end
 end
