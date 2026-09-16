@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root to: "homes#top"
   get "homes/about"
-  resources :books, only: [ :create, :index, :show, :edit, :update, :destroy ]
+  resources :books, only: [ :create, :index, :show, :edit, :update, :destroy ] do
+    resource :favorites, only: [ :create, :destroy ]
+  end
   resources :users, only: [ :new, :create, :index, :show, :edit, :update ], path_names: { new: 'sign_up' }
   resource :session
   resources :passwords, param: :token
