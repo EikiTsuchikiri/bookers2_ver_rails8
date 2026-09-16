@@ -27,7 +27,7 @@
             </li>
             <li>
               <%= link_to session_path, class: "nav-link text-light", data: { turbo_method: :delete } do %>
-                <i class="fas fa-sign-out-alt"></i> Logout
+                <i class="fas fa-sign-out-alt"></i> Log out
               <% end %>
             </li>
           <% else %>
@@ -48,7 +48,7 @@
             </li>
             <li>
               <%= link_to new_session_path, class: "nav-link text-light" do %>
-                <i class="fas fa-sign-in-alt"></i> Login
+                <i class="fas fa-sign-in-alt"></i> Log in
               <% end %>
             </li>
           <% end %>
