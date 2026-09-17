@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "homes/about"
   resources :books, only: [ :create, :index, :show, :edit, :update, :destroy ] do
     resource :favorites, only: [ :create, :destroy ]
+    resources :book_comments, only: [ :create, :destroy ]
   end
   resources :users, only: [ :new, :create, :index, :show, :edit, :update ], path_names: { new: 'sign_up' }
   resource :session

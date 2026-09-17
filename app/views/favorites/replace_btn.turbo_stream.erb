@@ -1,5 +1,1 @@
-<%= turbo_stream.replace "favorite-#{@book.id}" do %>
-  <td id="<%= "favorite-#{@book.id}" %>">
-    <%= render 'favorites/btn', book: @book %>
-  </td>
-<% end %>
+<%= turbo_stream.update "favorite-#{@book.id}", partial: "favorites/btn", locals: { book: @book } %>

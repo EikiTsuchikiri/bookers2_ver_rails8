@@ -1,0 +1,5 @@
+<%= turbo_stream.update "book-comments-counter", partial: "book_comments/counter", locals: { book: @book } %>
+
+<%= turbo_stream.update "book-comments-index", partial: "book_comments/index", locals: { book: @book } %>
+
+<%= turbo_stream.update "book-comments-form", partial: "book_comments/form", locals: { book: @book, book_comment: BookComment.new } %>
