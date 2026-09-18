@@ -3,8 +3,13 @@ class BooksController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @books = Book.all
     @book = Book.new
+    @q = Book.ransack(params[:q])
+    if params[:q].present?
+      @books = @q.result(distinct: true).includes(:user)
+    else
+      @books = Book.all.includes(:user)
+    end
   end
 
   def create
@@ -12,7 +17,7 @@ class BooksController < ApplicationController
     if @book.save
       redirect_to book_path(@book), notice: 'You have created book successfully.'
     else
-      @books = Book.all
+      @books = Book.all.includes(:user)
       render :index, status: :unprocessable_entity
     end
   end
