@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     resource :favorites, only: [ :create, :destroy ]
     resources :book_comments, only: [ :create, :destroy ]
   end
-  resources :users, only: [ :new, :create, :index, :show, :edit, :update ], path_names: { new: 'sign_up' }
+  resources :users, only: [ :new, :create, :index, :show, :edit, :update ], path_names: { new: 'sign_up' } do
+    resource :relationships, only: [ :create, :destroy ]
+    get "followings" => "relationships#followings"
+    get "followers" => "relationships#followers"
+  end
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
