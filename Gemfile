@@ -66,3 +66,4 @@ end
 
 gem "net-smtp"
 gem "ransack"
+gem "acts-as-taggable-on"

@@ -6,18 +6,20 @@ class BooksController < ApplicationController
     @book = Book.new
     @q = Book.ransack(params[:q])
     if params[:q].present?
-      @books = @q.result(distinct: true).includes(:user)
+      @books = @q.result(distinct: true).includes(:user, :favorites, :tags)
+    elsif params[:tag_name].present?
+      @books = Book.tagged_with("#{params[:tag_name]}")
     else
-      @books = Book.all.includes(:user)
+      @books = Book.all.includes(:user, :favorites, :tags)
     end
   end
 
   def create
     @book = Current.user.books.new(book_params)
     if @book.save
-      redirect_to book_path(@book), notice: 'You have created book successfully.'
+      redirect_to book_path(@book), notice: "You have created book successfully."
     else
-      @books = Book.all.includes(:user)
+      @books = Book.all.includes(:user, :favorites, :tags)
       render :index, status: :unprocessable_entity
     end
   end
@@ -26,6 +28,7 @@ class BooksController < ApplicationController
     @new_book = Book.new
     @user = @book.user
     @book_comment = BookComment.new
+    @tags = @book.tag_counts_on(:tags)
   end
 
   def edit
@@ -47,7 +50,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :tag_list)
   end
 
   def set_book

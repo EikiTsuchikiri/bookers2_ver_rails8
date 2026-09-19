@@ -21,6 +21,9 @@
         <td>
           <%= book.body %>
         </td>
+        <td>
+          <%= render 'books/tag_list', tags: book.tag_counts.most_used(5) %>
+        </td>
         <td id="<%= "favorite-#{book.id}" %>">
           <%= render 'favorites/btn', book: book %>
         </td>
