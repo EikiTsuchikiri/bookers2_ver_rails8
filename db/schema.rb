@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_19_151658) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_19_161133) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -65,6 +65,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_19_151658) do
     t.integer "user_id", null: false
     t.index ["book_id"], name: "index_favorites_on_book_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "notifiable_id", null: false
+    t.string "notifiable_type", null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -130,6 +141,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_19_151658) do
   add_foreign_key "book_comments", "users"
   add_foreign_key "favorites", "books"
   add_foreign_key "favorites", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
   add_foreign_key "sessions", "users"

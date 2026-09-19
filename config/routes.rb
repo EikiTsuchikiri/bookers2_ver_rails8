@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get "followings" => "relationships#followings"
     get "followers" => "relationships#followers"
   end
+  resources :notifications, only: [:update]
   resource :session
   resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
